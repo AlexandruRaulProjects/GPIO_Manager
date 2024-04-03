@@ -1,0 +1,3 @@
+from Flask_GPIO_Manager.GPIO_Manager.model import db
+from Flask_GPIO_Manager.GPIO_Manager.model import User
+db.create_all()
