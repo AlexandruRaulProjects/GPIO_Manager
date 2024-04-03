@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="card mt-2">
+        <div class="card-header">
+            Audit logs
+        </div>
+        <div class="card-content">
+            <ul class="list-group">
+                {% for log in logs %}
+                    <li class="list-group-item">User {{ log.user }} {{ log.action }}.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,17 @@
+.btn-outline-secondary.nav-item {
+    margin-right: 0.25rem;
+    padding: 0.001rem 0.5rem;
+    border-style: none;
+}
+
+.btn-outline-secondary.nav-item:hover {
+    background: #cccccc;
+}
+
+.card.border-dark {
+    margin-top: 0.5rem;
+}
+
+div.invalid-feedback {
+    color: #f3a4a4;
+}
