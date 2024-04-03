@@ -1,3 +1,4 @@
 from Flask_GPIO_Manager.GPIO_Manager.model import db
 from Flask_GPIO_Manager.GPIO_Manager.model import User
+from Flask_GPIO_Manager.GPIO_Manager.model import Pin
 db.create_all()
