@@ -1,9 +1,56 @@
 {% extends "layout.html" %}
 {% block content %}
+    <h1>Pin Creator</h1>
+    <div class="card-body">
+           <form class="" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.number.label(class="form-control-label") }}
+                    {% if form.number.errors %}
+                        {{ form.number(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.number.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.number(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+            </fieldset>
+            <div class="form-group my-3">
+                    {{ form.submit(class="btn btn-secondary") }}
+            </div>
+        </form>
+    </div>
     <h1>GPIO pins control panel</h1>
     <div class="form-check form-switch">
         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
         <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
     </div>
+    {% for pin in pins  %}
+    <div class="form-check form-switch">
+        <span>Name: </span>
+        <span>{{ pin.name }}</span>
+        <span>Number: </span>
+        <span>{{ pin.number }}</span>
+        <input class="form-check-input" type="checkbox">
+    </div>
+    {% endfor %}
 
 {% endblock content %}
