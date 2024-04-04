@@ -1,9 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
-from Flask_GPIO_Manager.GPIO_Manager.forms import RegistrationForm, LoginForm
+from Flask_GPIO_Manager.GPIO_Manager.forms import RegistrationForm, LoginForm, AddPinForm
 from Flask_GPIO_Manager.GPIO_Manager import app, bcrypt
-from Flask_GPIO_Manager.GPIO_Manager.model import db, User
+from Flask_GPIO_Manager.GPIO_Manager.model import db, User, Pin
 from flask_login import login_user, logout_user, current_user, login_required
-
 
 logs = [
     {
@@ -77,8 +76,14 @@ def account():
     return render_template('account.html', title='account')
 
 
-@app.route('/gpio')
-@login_required
+@app.route('/gpio', methods=['GET', 'POST'])
 def gpio():
-    return render_template('gpio.html', title='gpio')
-
+    form = AddPinForm()
+    if form.validate_on_submit():
+        pin = Pin(name=form.name.data, number=form.number.data, user_id=current_user.id)
+        db.session.add(pin)
+        db.session.commit()
+        flash(f'A pin has been added successfully!', 'success')
+        return redirect(url_for('gpio'))
+    pins = Pin.query.filter_by(user_id=current_user.id).all()
+    return render_template('gpio.html', title='gpio', form=form, pins=pins)
